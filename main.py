@@ -3,10 +3,19 @@ from pydantic import BaseModel
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
 
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["GET"],
+    allow_headers=["*"],
+)
 class EmailSchema(BaseModel):
     name : str
     email :str
